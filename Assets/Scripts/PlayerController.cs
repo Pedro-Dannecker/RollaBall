@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementY;
     private int count;
+    public AudioClip coin;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,11 +60,16 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Pickup")){
+            AudioSource.PlayClipAtPoint(coin,transform.position);
             other.gameObject.SetActive(false);
             count = count + 1; 
             SetCountText();
 
 
+        }
+
+        else if(other.gameObject.CompareTag("obstaculo")){
+            SceneManager.LoadScene(0);
         }
         
     }
